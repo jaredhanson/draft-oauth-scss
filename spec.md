@@ -1,7 +1,9 @@
 ---
+docname: draft-hanson-oauth-scss-00
+category: std
+
 title: OAuth 2.0 Session Continuity and Signal Sharing
 abbrev: scss
-docname: draft-hanson-oauth-scss-00
 author:
   -
     ins: J. Hanson
@@ -13,6 +15,9 @@ author:
     name: Karl McGuinness
     organization: Okta
     email: kmcguinness@okta.com
+
+area: Security
+workgroup: Web Authorization Protocol
 
 --- abstract
 
