@@ -5,3 +5,6 @@ spec: spec.txt
 
 %.txt: %.xml
 	xml2rfc $< -o $@ --text
+
+%.html: %.xml
+	xml2rfc $< -o $@ --html
