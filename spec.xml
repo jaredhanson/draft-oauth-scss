@@ -81,20 +81,20 @@ publish-subscribe approach.</t>
 Section 2.1 of <xref target="RFC6749"/>:</t>
 
 <t><list style="hanging">
-  <t hangText='web application:'>
+  <t hangText='web application:'><vspace blankLines='0'/>
   A web application is a confidential client running on a web server.  Resource
 owners access the client via an HTML user interface rendered in a user-agent on
 the device used by the resource owner.  The client credentials as well as any
 access token issued to the client are stored on the web server and are not
 exposed to or accessible by the resource owner.</t>
-  <t hangText='user-agent-based application:'>
+  <t hangText='user-agent-based application:'><vspace blankLines='0'/>
   A user-agent-based application is a public client in which the client code is
 downloaded from a web server and executes within a user-agent (e.g., web
 browser) on the device used by the resource owner.  Protocol data and
 credentials are easily accessible (and often visible) to the resource owner.
 Since such applications reside within the user-agent, they can make seamless use
 of the user-agent capabilities when requesting authorization.</t>
-  <t hangText='native application:'>
+  <t hangText='native application:'><vspace blankLines='0'/>
   A native application is a public client installed and executed on the device
 used by the resource owner.  Protocol data and credentials are accessible to the
 resource owner.  It is assumed that any client authentication credentials
@@ -115,12 +115,12 @@ clients.  This specification defines two token localities, based on where tokens
 reside relative to the user-agent in which the issuance was approved:</t>
 
 <t><list style="hanging">
-  <t hangText='off device:'>
+  <t hangText='off device:'><vspace blankLines='0'/>
   A token is off device when it resides with an application that is not located
 on the same device as the end-user’s user-agent.  Tokens issued to a web
 application are off device, as the application runs on a web server acceessed
 remotely via the user-agent.</t>
-  <t hangText='on device:'>
+  <t hangText='on device:'><vspace blankLines='0'/>
   A token is on device when it resides with an application that is located on
 the same device as the end-user’s user-agent.  Tokens issued to native
 native applications and user-agent-based applications are on device, as the
@@ -253,69 +253,70 @@ a resource server.</t>
   </back>
 
 <!-- ##markdown-source:
-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
+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
+nM1DBB8AAA==
 
 -->
 

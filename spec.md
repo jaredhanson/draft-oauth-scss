@@ -56,6 +56,7 @@ publish-subscribe approach.
 This specification has been designed around the client profiles defined in
 Section 2.1 of {{!RFC6749}}:
 
+{: vspace="0"}
 web application:
 : A web application is a confidential client running on a web server.  Resource
 owners access the client via an HTML user interface rendered in a user-agent on
@@ -89,6 +90,7 @@ user-agent, OAuth issues delegation-specific access tokens and refresh tokens to
 clients.  This specification defines two token localities, based on where tokens
 reside relative to the user-agent in which the issuance was approved:
 
+{: vspace="0"}
 off device:
 : A token is off device when it resides with an application that is not located
 on the same device as the end-user's user-agent.  Tokens issued to a web
