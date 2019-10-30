@@ -51,10 +51,6 @@ intended to provide a lightweight approach to continuous authorization, while
 complimenting future protocols that provide real-time access evaluation using a
 publish-subscribe approach.
 
-## Notational Conventions
-
-{::boilerplate bcp14}
-
 ## Client Profiles
 
 This specification has been designed around the client profiles defined in
@@ -105,6 +101,9 @@ the same device as the end-user's user-agent.  Tokens issued to native
 native applications and user-agent-based applications are on device, as the
 application is executing either on the device or within the user-agent itself.
 
+## Notational Conventions
+
+{::boilerplate bcp14}
 
 # Signal Sharing
 

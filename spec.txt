@@ -83,15 +83,7 @@ Internet-Draft               OAuth 2.0 SCSS                 October 2019
    protocols that provide real-time access evaluation using a publish-
    subscribe approach.
 
-1.1.  Notational Conventions
-
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in
-   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
-   capitals, as shown here.
-
-1.2.  Client Profiles
+1.1.  Client Profiles
 
    This specification has been designed around the client profiles
    defined in Section 2.1 of [RFC6749]:
@@ -106,14 +98,6 @@ Internet-Draft               OAuth 2.0 SCSS                 October 2019
    user-agent-based application:  A user-agent-based application is a
       public client in which the client code is downloaded from a web
       server and executes within a user-agent (e.g., web browser) on the
-
-
-
-Hanson & McGuinness        Expires May 2, 2020                  [Page 2]
-
-Internet-Draft               OAuth 2.0 SCSS                 October 2019
-
-
       device used by the resource owner.  Protocol data and credentials
       are easily accessible (and often visible) to the resource owner.
       Since such applications reside within the user-agent, they can
@@ -122,6 +106,14 @@ Internet-Draft               OAuth 2.0 SCSS                 October 2019
 
    native application:  A native application is a public client
       installed and executed on the device used by the resource owner.
+
+
+
+Hanson & McGuinness        Expires May 2, 2020                  [Page 2]
+
+Internet-Draft               OAuth 2.0 SCSS                 October 2019
+
+
       Protocol data and credentials are accessible to the resource
       owner.  It is assumed that any client authentication credentials
       included in the application can be extracted.  On the other hand,
@@ -132,7 +124,7 @@ Internet-Draft               OAuth 2.0 SCSS                 October 2019
       credentials might be protected from other applications residing on
       the same device.
 
-1.3.  Token Locality
+1.2.  Token Locality
 
    After obtaining approval of the end-user via interaction within the
    end-user's user-agent, OAuth issues delegation-specific access tokens
@@ -151,6 +143,14 @@ Internet-Draft               OAuth 2.0 SCSS                 October 2019
       Tokens issued to native native applications and user-agent-based
       applications are on device, as the application is executing either
       on the device or within the user-agent itself.
+
+1.3.  Notational Conventions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
 
 2.  Signal Sharing
 
