@@ -55,7 +55,7 @@ Copyright Notice
 
 Hanson & McGuinness        Expires May 2, 2020                  [Page 1]
 
-Internet-Draft                    scss                      October 2019
+Internet-Draft               OAuth 2.0 SCSS                 October 2019
 
 
 1.  Introduction
@@ -111,7 +111,7 @@ Internet-Draft                    scss                      October 2019
 
 Hanson & McGuinness        Expires May 2, 2020                  [Page 2]
 
-Internet-Draft                    scss                      October 2019
+Internet-Draft               OAuth 2.0 SCSS                 October 2019
 
 
       device used by the resource owner.  Protocol data and credentials
@@ -167,7 +167,7 @@ Internet-Draft                    scss                      October 2019
 
 Hanson & McGuinness        Expires May 2, 2020                  [Page 3]
 
-Internet-Draft                    scss                      October 2019
+Internet-Draft               OAuth 2.0 SCSS                 October 2019
 
 
    For example, the client makes the following HTTP request using
@@ -223,7 +223,7 @@ Internet-Draft                    scss                      October 2019
 
 Hanson & McGuinness        Expires May 2, 2020                  [Page 4]
 
-Internet-Draft                    scss                      October 2019
+Internet-Draft               OAuth 2.0 SCSS                 October 2019
 
 
    In addition to the parameters defined by Section 2.1 of [RFC7662],
@@ -279,7 +279,7 @@ Internet-Draft                    scss                      October 2019
 
 Hanson & McGuinness        Expires May 2, 2020                  [Page 5]
 
-Internet-Draft                    scss                      October 2019
+Internet-Draft               OAuth 2.0 SCSS                 October 2019
 
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC

@@ -3,7 +3,7 @@ docname: draft-hanson-oauth-scss-00
 category: std
 
 title: OAuth 2.0 Session Continuity and Signal Sharing
-abbrev: scss
+abbrev: OAuth 2.0 SCSS
 author:
   -
     ins: J. Hanson
@@ -29,7 +29,7 @@ to continuous authorization.
 
 --- middle
 
-# Introduction        {#problems2}
+# Introduction
 
 In OAuth, an authorization server issues access tokens to clients, which are
 used to access protected resources hosted by a resource server.  Prior to
@@ -106,7 +106,7 @@ native applications and user-agent-based applications are on device, as the
 application is executing either on the device or within the user-agent itself.
 
 
-# Signal Sharing        {#problems8}
+# Signal Sharing
 
 ## Refreshing an Access Token
 
