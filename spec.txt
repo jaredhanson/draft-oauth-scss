@@ -83,7 +83,15 @@ Internet-Draft                    scss                      October 2019
    protocols that provide real-time access evaluation using a publish-
    subscribe approach.
 
-1.1.  Client Profiles
+1.1.  Notational Conventions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+1.2.  Client Profiles
 
    This specification has been designed around the client profiles
    defined in Section 2.1 of [RFC6749]:
@@ -98,14 +106,6 @@ Internet-Draft                    scss                      October 2019
    user-agent-based application:  A user-agent-based application is a
       public client in which the client code is downloaded from a web
       server and executes within a user-agent (e.g., web browser) on the
-      device used by the resource owner.  Protocol data and credentials
-      are easily accessible (and often visible) to the resource owner.
-      Since such applications reside within the user-agent, they can
-      make seamless use of the user-agent capabilities when requesting
-      authorization.
-
-   native application:  A native application is a public client
-      installed and executed on the device used by the resource owner.
 
 
 
@@ -114,6 +114,14 @@ Hanson & McGuinness        Expires May 2, 2020                  [Page 2]
 Internet-Draft                    scss                      October 2019
 
 
+      device used by the resource owner.  Protocol data and credentials
+      are easily accessible (and often visible) to the resource owner.
+      Since such applications reside within the user-agent, they can
+      make seamless use of the user-agent capabilities when requesting
+      authorization.
+
+   native application:  A native application is a public client
+      installed and executed on the device used by the resource owner.
       Protocol data and credentials are accessible to the resource
       owner.  It is assumed that any client authentication credentials
       included in the application can be extracted.  On the other hand,
@@ -124,7 +132,7 @@ Internet-Draft                    scss                      October 2019
       credentials might be protected from other applications residing on
       the same device.
 
-1.2.  Token Locality
+1.3.  Token Locality
 
    After obtaining approval of the end-user via interaction within the
    end-user's user-agent, OAuth issues delegation-specific access tokens
@@ -155,20 +163,16 @@ Internet-Draft                    scss                      October 2019
    posture, as defined in section 6 of
    [I-D.wdenniss-oauth-device-posture].
 
-   For example, the client makes the following HTTP request using
-   transport-layer security (with extra line breaks for display purposes
-   only):
-
-
-
-
-
 
 
 Hanson & McGuinness        Expires May 2, 2020                  [Page 3]
 
 Internet-Draft                    scss                      October 2019
 
+
+   For example, the client makes the following HTTP request using
+   transport-layer security (with extra line breaks for display purposes
+   only):
 
    POST /token HTTP/1.1
    Host: server.example.com
@@ -213,10 +217,6 @@ Internet-Draft                    scss                      October 2019
    to the introspection endpoint, as defined in Section 2.1 of
    [RFC7662].
 
-   In addition to the parameters defined by Section 2.1 of [RFC7662],
-   the following parameters are also defined:
-
-
 
 
 
@@ -225,6 +225,9 @@ Hanson & McGuinness        Expires May 2, 2020                  [Page 4]
 
 Internet-Draft                    scss                      October 2019
 
+
+   In addition to the parameters defined by Section 2.1 of [RFC7662],
+   the following parameters are also defined:
 
    user_agent_posture  OPTIONAL.  URL-encoded JSON dictionary,
       containing user-agent posture signals, as defined by User Agent
@@ -256,6 +259,11 @@ Internet-Draft                    scss                      October 2019
               Device Posture Signals", draft-wdenniss-oauth-device-
               posture-01 (work in progress), November 2017.
 
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
    [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
               <https://www.rfc-editor.org/info/rfc6749>.
@@ -263,14 +271,6 @@ Internet-Draft                    scss                      October 2019
    [RFC7662]  Richer, J., Ed., "OAuth 2.0 Token Introspection",
               RFC 7662, DOI 10.17487/RFC7662, October 2015,
               <https://www.rfc-editor.org/info/rfc7662>.
-
-Authors' Addresses
-
-   Jared Hanson
-   Okta
-
-   Email: jared.hanson@okta.com
-
 
 
 
@@ -282,22 +282,22 @@ Hanson & McGuinness        Expires May 2, 2020                  [Page 5]
 Internet-Draft                    scss                      October 2019
 
 
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+Authors' Addresses
+
+   Jared Hanson
+   Okta
+
+   Email: jared.hanson@okta.com
+
+
    Karl McGuinness
    Okta
 
    Email: kmcguinness@okta.com
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

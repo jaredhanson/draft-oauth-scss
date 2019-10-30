@@ -8,12 +8,12 @@ author:
   -
     ins: J. Hanson
     name: Jared Hanson
-    organization: Okta
+    org: Okta
     email: jared.hanson@okta.com
   -
     ins: K. McGuinness
     name: Karl McGuinness
-    organization: Okta
+    org: Okta
     email: kmcguinness@okta.com
 
 area: Security
@@ -50,6 +50,10 @@ transported using existing OAuth 2.0 endpoints.  Use of existing endpoints is
 intended to provide a lightweight approach to continuous authorization, while
 complimenting future protocols that provide real-time access evaluation using a
 publish-subscribe approach.
+
+## Notational Conventions
+
+{::boilerplate bcp14}
 
 ## Client Profiles
 
