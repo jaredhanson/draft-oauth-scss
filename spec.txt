@@ -183,13 +183,14 @@ Internet-Draft               OAuth 2.0 SCSS                 October 2019
    transport-layer security (with extra line breaks for display purposes
    only):
 
-   POST /token HTTP/1.1
-   Host: server.example.com
-   Content-Type: application/x-www-form-urlencoded
+     POST /token HTTP/1.1
+     Host: server.example.com
+     Content-Type: application/x-www-form-urlencoded
 
-   grant_type=refresh_token&refresh_token=tGzv3JOkF0XG5Qx2TlKWIA
-   client_id=s6BhdRkqt3&device_posture=%7B%22screen_lock%22%3Atrue%2C
-   %22device_os%22%3A%22iOS%22%2C%22device_os_version%22%3A%2211.1%22%7D
+     grant_type=refresh_token&refresh_token=tGzv3JOkF0XG5Qx2TlKWIA
+     client_id=s6BhdRkqt3&device_posture=%7B%22screen_lock%22%3Atrue%2C
+     %22device_os%22%3A%22iOS%22%2C%22device_os_version%22%3A%2211.1%22
+     %7D
 
 2.1.2.  From Off Device
 
@@ -216,7 +217,6 @@ Internet-Draft               OAuth 2.0 SCSS                 October 2019
    scenarios.  Refresh tokens used in offline scenarios, when the end-
    user is not present, are decoupled from the session and lack end-user
    user agent context.
-
 
 
 

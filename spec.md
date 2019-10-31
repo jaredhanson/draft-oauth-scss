@@ -127,7 +127,8 @@ security (with extra line breaks for display purposes only):
 
   grant_type=refresh_token&refresh_token=tGzv3JOkF0XG5Qx2TlKWIA
   client_id=s6BhdRkqt3&device_posture=%7B%22screen_lock%22%3Atrue%2C
-  %22device_os%22%3A%22iOS%22%2C%22device_os_version%22%3A%2211.1%22%7D
+  %22device_os%22%3A%22iOS%22%2C%22device_os_version%22%3A%2211.1%22
+  %7D
 ~~~~~~~~~~
 
 ### From Off Device
