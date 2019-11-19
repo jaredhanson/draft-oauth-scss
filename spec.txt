@@ -5,7 +5,7 @@
 Web Authorization Protocol                                     J. Hanson
 Internet-Draft                                             K. McGuinness
 Intended status: Standards Track                                    Okta
-Expires: May 2, 2020                                    October 30, 2019
+Expires: May 2, 2020                                    October 30, 2020
 
 
             OAuth 2.0 Session Continuity and Signal Sharing
