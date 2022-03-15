@@ -8,8 +8,8 @@ Intended status: Standards Track                                    Okta
 Expires: 16 September 2022                                 15 March 2022
 
 
-            OAuth 2.0 Session Continuity and Signal Sharing
-                       draft-hanson-oauth-scss-00
+                      OAuth 2.0 Session Continuity
+              draft-hanson-oauth-session-continuity-latest
 
 Abstract
 
@@ -55,7 +55,7 @@ Copyright Notice
 
 Hanson & McGuinness     Expires 16 September 2022               [Page 1]
 
-Internet-Draft               OAuth 2.0 SCSS                   March 2022
+Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
 
 Table of Contents
@@ -111,7 +111,7 @@ Table of Contents
 
 Hanson & McGuinness     Expires 16 September 2022               [Page 2]
 
-Internet-Draft               OAuth 2.0 SCSS                   March 2022
+Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
 
       A web application is a confidential client running on a web
@@ -167,7 +167,7 @@ Internet-Draft               OAuth 2.0 SCSS                   March 2022
 
 Hanson & McGuinness     Expires 16 September 2022               [Page 3]
 
-Internet-Draft               OAuth 2.0 SCSS                   March 2022
+Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
 
       A token is on device when it resides with an application that is
@@ -223,7 +223,7 @@ Internet-Draft               OAuth 2.0 SCSS                   March 2022
 
 Hanson & McGuinness     Expires 16 September 2022               [Page 4]
 
-Internet-Draft               OAuth 2.0 SCSS                   March 2022
+Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
 
   POST /token HTTP/1.1
@@ -279,7 +279,7 @@ Internet-Draft               OAuth 2.0 SCSS                   March 2022
 
 Hanson & McGuinness     Expires 16 September 2022               [Page 5]
 
-Internet-Draft               OAuth 2.0 SCSS                   March 2022
+Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
 
    Note that the locality of an access token is always off device when
