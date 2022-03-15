@@ -22,10 +22,13 @@ workgroup: Web Authorization Protocol
 
 --- abstract
 
-This specification defines a mechanism in which clients and resource servers can
-share session signals with an authorization server.  These signals are
-transported using existing OAuth 2.0 endpoints, providing a lightweight approach
-to continuous authorization.
+This specification defines a mechanism by which an OAuth 2.0 authorization
+server can maintain a logical authorization session in which protected resources
+can be accessed over a period time.  This specification also extends existing
+OAuth 2.0 endpoints so that dynamic context about the session, such as user
+location or device health, can be communicated to the authorization server
+throughout the lifetime of the session.  Combined, this functionality provides
+a lightweight approach to continuous authorization.
 
 
 --- middle
