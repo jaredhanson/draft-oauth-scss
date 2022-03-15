@@ -1,4 +1,4 @@
-spec: spec.txt
+spec: draft-hanson-oauth-session-continuity.xml draft-hanson-oauth-session-continuity.txt
 
 %.xml: %.md
 	kramdown-rfc $< >$@

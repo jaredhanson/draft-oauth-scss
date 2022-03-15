@@ -1,6 +1,8 @@
 ---
 docname: draft-hanson-oauth-scss-00
 category: std
+ipr: trust200902
+submissionType: IETF
 
 title: OAuth 2.0 Session Continuity and Signal Sharing
 abbrev: OAuth 2.0 SCSS

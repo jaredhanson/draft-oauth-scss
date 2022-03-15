@@ -5,7 +5,7 @@
 Web Authorization Protocol                                     J. Hanson
 Internet-Draft                                             K. McGuinness
 Intended status: Standards Track                                    Okta
-Expires: May 2, 2020                                    October 30, 2019
+Expires: 16 September 2022                                 15 March 2022
 
 
             OAuth 2.0 Session Continuity and Signal Sharing
@@ -33,30 +33,45 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 2, 2020.
+   This Internet-Draft will expire on 16 September 2022.
 
 Copyright Notice
 
-   Copyright (c) 2019 IETF Trust and the persons identified as the
+   Copyright (c) 2022 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
-   Provisions Relating to IETF Documents
-   (https://trustee.ietf.org/license-info) in effect on the date of
-   publication of this document.  Please review these documents
-   carefully, as they describe your rights and restrictions with respect
-   to this document.  Code Components extracted from this document must
-   include Simplified BSD License text as described in Section 4.e of
-   the Trust Legal Provisions and are provided without warranty as
-   described in the Simplified BSD License.
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
 
 
 
 
-Hanson & McGuinness        Expires May 2, 2020                  [Page 1]
+
+Hanson & McGuinness     Expires 16 September 2022               [Page 1]
 
-Internet-Draft               OAuth 2.0 SCSS                 October 2019
+Internet-Draft               OAuth 2.0 SCSS                   March 2022
 
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+     1.1.  Client Profiles . . . . . . . . . . . . . . . . . . . . .   2
+     1.2.  Token Locality  . . . . . . . . . . . . . . . . . . . . .   3
+     1.3.  Notational Conventions  . . . . . . . . . . . . . . . . .   4
+   2.  Signal Sharing  . . . . . . . . . . . . . . . . . . . . . . .   4
+     2.1.  Refreshing an Access Token  . . . . . . . . . . . . . . .   4
+       2.1.1.  From On Device  . . . . . . . . . . . . . . . . . . .   4
+       2.1.2.  From Off Device . . . . . . . . . . . . . . . . . . .   4
+     2.2.  Token Introspection . . . . . . . . . . . . . . . . . . .   5
+       2.2.1.  Introspection Request . . . . . . . . . . . . . . . .   5
+   3.  Normative References  . . . . . . . . . . . . . . . . . . . .   6
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   6
 
 1.  Introduction
 
@@ -89,6 +104,16 @@ Internet-Draft               OAuth 2.0 SCSS                 October 2019
    defined in Section 2.1 of [RFC6749]:
 
    web application:
+
+
+
+
+
+Hanson & McGuinness     Expires 16 September 2022               [Page 2]
+
+Internet-Draft               OAuth 2.0 SCSS                   March 2022
+
+
       A web application is a confidential client running on a web
       server.  Resource owners access the client via an HTML user
       interface rendered in a user-agent on the device used by the
@@ -106,14 +131,6 @@ Internet-Draft               OAuth 2.0 SCSS                 October 2019
       user-agent capabilities when requesting authorization.
 
    native application:
-
-
-
-Hanson & McGuinness        Expires May 2, 2020                  [Page 2]
-
-Internet-Draft               OAuth 2.0 SCSS                 October 2019
-
-
       A native application is a public client installed and executed on
       the device used by the resource owner.  Protocol data and
       credentials are accessible to the resource owner.  It is assumed
@@ -142,6 +159,17 @@ Internet-Draft               OAuth 2.0 SCSS                 October 2019
       agent.
 
    on device:
+
+
+
+
+
+
+Hanson & McGuinness     Expires 16 September 2022               [Page 3]
+
+Internet-Draft               OAuth 2.0 SCSS                   March 2022
+
+
       A token is on device when it resides with an application that is
       located on the same device as the end-user's user-agent.  Tokens
       issued to native native applications and user-agent-based
@@ -157,18 +185,6 @@ Internet-Draft               OAuth 2.0 SCSS                 October 2019
    capitals, as shown here.
 
 2.  Signal Sharing
-
-
-
-
-
-
-
-
-Hanson & McGuinness        Expires May 2, 2020                  [Page 3]
-
-Internet-Draft               OAuth 2.0 SCSS                 October 2019
-
 
 2.1.  Refreshing an Access Token
 
@@ -202,6 +218,14 @@ Internet-Draft               OAuth 2.0 SCSS                 October 2019
    transport-layer security (with extra line breaks for display purposes
    only):
 
+
+
+
+Hanson & McGuinness     Expires 16 September 2022               [Page 4]
+
+Internet-Draft               OAuth 2.0 SCSS                   March 2022
+
+
   POST /token HTTP/1.1
   Host: server.example.com
   Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
@@ -217,14 +241,6 @@ Internet-Draft               OAuth 2.0 SCSS                 October 2019
    scenarios.  Refresh tokens used in offline scenarios, when the end-
    user is not present, are decoupled from the session and lack end-user
    user agent context.
-
-
-
-
-Hanson & McGuinness        Expires May 2, 2020                  [Page 4]
-
-Internet-Draft               OAuth 2.0 SCSS                 October 2019
-
 
 2.2.  Token Introspection
 
@@ -258,53 +274,52 @@ Internet-Draft               OAuth 2.0 SCSS                 October 2019
   %20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F75.0.3770.142%20Safari%2F537.36%22
   %2C%22ip_address%22%3A%2293.184.216.34%22%7D
 
+
+
+
+Hanson & McGuinness     Expires 16 September 2022               [Page 5]
+
+Internet-Draft               OAuth 2.0 SCSS                   March 2022
+
+
    Note that the locality of an access token is always off device when
    presented to a resource server.
 
 3.  Normative References
 
-   [I-D.wdenniss-oauth-device-posture]
-              Denniss, W., McGuinness, K., and J. Bradley, "OAuth 2.0
-              Device Posture Signals", draft-wdenniss-oauth-device-
-              posture-01 (work in progress), November 2017.
+   [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
+              RFC 6749, DOI 10.17487/RFC6749, October 2012,
+              <https://www.rfc-editor.org/info/rfc6749>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-
-
-
-Hanson & McGuinness        Expires May 2, 2020                  [Page 5]
-
-Internet-Draft               OAuth 2.0 SCSS                 October 2019
-
-
-   [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
-              RFC 6749, DOI 10.17487/RFC6749, October 2012,
-              <https://www.rfc-editor.org/info/rfc6749>.
+   [I-D.wdenniss-oauth-device-posture]
+              Denniss, W., McGuinness, K., and J. Bradley, "OAuth 2.0
+              Device Posture Signals", Work in Progress, Internet-Draft,
+              draft-wdenniss-oauth-device-posture-01, 13 November 2017,
+              <https://www.ietf.org/archive/id/draft-wdenniss-oauth-
+              device-posture-01.txt>.
 
    [RFC7662]  Richer, J., Ed., "OAuth 2.0 Token Introspection",
               RFC 7662, DOI 10.17487/RFC7662, October 2015,
               <https://www.rfc-editor.org/info/rfc7662>.
 
-   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
-              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
-
 Authors' Addresses
 
    Jared Hanson
    Okta
-
    Email: jared.hanson@okta.com
 
 
    Karl McGuinness
    Okta
-
    Email: kmcguinness@okta.com
 
 
@@ -318,19 +333,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Hanson & McGuinness        Expires May 2, 2020                  [Page 6]
+Hanson & McGuinness     Expires 16 September 2022               [Page 6]
