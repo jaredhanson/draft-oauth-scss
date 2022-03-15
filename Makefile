@@ -1,7 +1,7 @@
 spec: spec.txt
 
 %.xml: %.md
-	kramdown-rfc2629 $< >$@
+	kramdown-rfc $< >$@
 
 %.txt: %.xml
 	xml2rfc $< -o $@ --text
