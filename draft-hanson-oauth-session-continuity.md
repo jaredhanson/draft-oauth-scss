@@ -59,7 +59,8 @@ session initiation.
 This specification provides mechanisms by which an OAuth deployment can both
 increase the frequency of access policy evaluation during a session, as well as
 increase awareness of dynamically changing context about the session used to
-inform policy decisions.
+inform policy decisions.  Combined, this functionality provides a lightweight
+approach to continuous authorization.
 
 ## Client Profiles
 

@@ -5,7 +5,7 @@
 Web Authorization Protocol                                     J. Hanson
 Internet-Draft                                             K. McGuinness
 Intended status: Standards Track                                    Okta
-Expires: 16 September 2022                                 15 March 2022
+Expires: 17 September 2022                                 16 March 2022
 
 
                       OAuth 2.0 Session Continuity
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 September 2022.
+   This Internet-Draft will expire on 17 September 2022.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Hanson & McGuinness     Expires 16 September 2022               [Page 1]
+Hanson & McGuinness     Expires 17 September 2022               [Page 1]
 
 Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Hanson & McGuinness     Expires 16 September 2022               [Page 2]
+Hanson & McGuinness     Expires 17 September 2022               [Page 2]
 
 Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
@@ -124,7 +124,9 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
    This specification provides mechanisms by which an OAuth deployment
    can both increase the frequency of access policy evaluation during a
    session, as well as increase awareness of dynamically changing
-   context about the session used to inform policy decisions.
+   context about the session used to inform policy decisions.  Combined,
+   this functionality provides a lightweight approach to continuous
+   authorization.
 
 1.1.  Client Profiles
 
@@ -163,9 +165,7 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
 
 
-
-
-Hanson & McGuinness     Expires 16 September 2022               [Page 3]
+Hanson & McGuinness     Expires 17 September 2022               [Page 3]
 
 Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
@@ -221,7 +221,7 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
 
 
-Hanson & McGuinness     Expires 16 September 2022               [Page 4]
+Hanson & McGuinness     Expires 17 September 2022               [Page 4]
 
 Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
@@ -277,7 +277,7 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
 
 
-Hanson & McGuinness     Expires 16 September 2022               [Page 5]
+Hanson & McGuinness     Expires 17 September 2022               [Page 5]
 
 Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
@@ -333,7 +333,7 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
 
 
-Hanson & McGuinness     Expires 16 September 2022               [Page 6]
+Hanson & McGuinness     Expires 17 September 2022               [Page 6]
 
 Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
@@ -389,4 +389,4 @@ Authors' Addresses
 
 
 
-Hanson & McGuinness     Expires 16 September 2022               [Page 7]
+Hanson & McGuinness     Expires 17 September 2022               [Page 7]
