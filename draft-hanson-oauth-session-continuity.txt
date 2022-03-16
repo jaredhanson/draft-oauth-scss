@@ -71,7 +71,7 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Client Profiles . . . . . . . . . . . . . . . . . . . . .   3
-     1.2.  Token Locality  . . . . . . . . . . . . . . . . . . . . .   3
+     1.2.  Token Locality  . . . . . . . . . . . . . . . . . . . . .   4
      1.3.  Notational Conventions  . . . . . . . . . . . . . . . . .   4
    2.  Signal Sharing  . . . . . . . . . . . . . . . . . . . . . . .   4
      2.1.  Refreshing an Access Token  . . . . . . . . . . . . . . .   4
@@ -79,33 +79,33 @@ Table of Contents
        2.1.2.  From Off Device . . . . . . . . . . . . . . . . . . .   5
      2.2.  Token Introspection . . . . . . . . . . . . . . . . . . .   5
        2.2.1.  Introspection Request . . . . . . . . . . . . . . . .   5
-   3.  Normative References  . . . . . . . . . . . . . . . . . . . .   6
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   6
+   3.  Comparison to CAEP  . . . . . . . . . . . . . . . . . . . . .   6
+   4.  Normative References  . . . . . . . . . . . . . . . . . . . .   6
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   7
 
 1.  Introduction
 
-   In OAuth, an authorization server issues access tokens to clients,
-   which are used to access protected resources hosted by a resource
-   server.  Prior to issuing tokens, the authorization server
-   authenticates the end-user and obtains consent.  This interaction
-   establishes a session in which the end-user accesses both the
-   authorization server and one or more applications.
+   In OAuth 2.0 [RFC6749], an authorization server issues an access
+   token and refresh token to a client.  The client uses the access
+   token to access protected resources hosted by a resource server, and
+   uses the refresh token to obtain access tokens from the authorization
+   server.  While the authorization server, client, and resource server
+   are separate entities, the usage of the access token and refresh
+   token forms a logical authorization session shared between each
+   entity.
 
-   These sessions can be long-lived, lasting for days or months.  During
-   this time, the status of the end-user and her device, such as
-   location, network address, or security posture, may change - requring
-   a change in access privileges.  Unfortunately, typical OAuth
-   deployments determine access only at the time of authentication and
-   lack awareness of dynamically changing information about ongoing
-   sessions.
+   The access token and refresh token are issued by the authorization
+   server after authenticating the resource owner and obtaining
+   authorization.  Authorization is typically obtained by interacting
+   with the resource owner via the authorization endpoint.  Once
+   authorization has been obtained, issuance of the tokens initiates an
+   ongoing session in which protected resources may be accessed over a
+   period of hours or even days.
 
-   This specification defines a mechanism in which clients and resource
-   servers can share session signals with an authorization server.
-   These signals are transported using existing OAuth 2.0 endpoints.
-   Use of existing endpoints is intended to provide a lightweight
-   approach to continuous authorization, while complimenting future
-   protocols that provide real-time access evaluation using a publish-
-   subscribe approach.
+
+
+
+
 
 
 
@@ -113,6 +113,18 @@ Hanson & McGuinness     Expires 16 September 2022               [Page 2]
 
 Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
+
+   During this time, the status of the resource owner and her device,
+   such as role, location, or security posture, may change.
+   Increasingly, access to protected resources needs to be based on this
+   dynamically changing context.  However, typical OAuth deployments
+   evaluate this context infrequently - often only at session
+   initiation.
+
+   This specification provides mechanisms by which an OAuth deployment
+   can both increase the frequency of access policy evaluation during a
+   session, as well as increase awareness of dynamically changing
+   context about the session used to inform policy decisions.
 
 1.1.  Client Profiles
 
@@ -149,18 +161,6 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
       might be protected from other applications residing on the same
       device.
 
-1.2.  Token Locality
-
-   After obtaining approval of the end-user via interaction within the
-   end-user's user-agent, OAuth issues delegation-specific access tokens
-   and refresh tokens to clients.  This specification defines two token
-   localities, based on where tokens reside relative to the user-agent
-   in which the issuance was approved:
-
-   off device:
-
-
-
 
 
 
@@ -170,6 +170,15 @@ Hanson & McGuinness     Expires 16 September 2022               [Page 3]
 Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
 
+1.2.  Token Locality
+
+   After obtaining approval of the end-user via interaction within the
+   end-user's user-agent, OAuth issues delegation-specific access tokens
+   and refresh tokens to clients.  This specification defines two token
+   localities, based on where tokens reside relative to the user-agent
+   in which the issuance was approved:
+
+   off device:
       A token is off device when it resides with an application that is
       not located on the same device as the end-user's user-agent.
       Tokens issued to a web application are off device, as the
@@ -206,15 +215,6 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
    transport-layer security (with extra line breaks for display purposes
    only):
 
-     POST /token HTTP/1.1
-     Host: server.example.com
-     Content-Type: application/x-www-form-urlencoded
-
-     grant_type=refresh_token&refresh_token=tGzv3JOkF0XG5Qx2TlKWIA
-     client_id=s6BhdRkqt3&device_posture=%7B%22screen_lock%22%3Atrue%2C
-     %22device_os%22%3A%22iOS%22%2C%22device_os_version%22%3A%2211.1%22
-     %7D
-
 
 
 
@@ -225,6 +225,15 @@ Hanson & McGuinness     Expires 16 September 2022               [Page 4]
 
 Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
+
+     POST /token HTTP/1.1
+     Host: server.example.com
+     Content-Type: application/x-www-form-urlencoded
+
+     grant_type=refresh_token&refresh_token=tGzv3JOkF0XG5Qx2TlKWIA
+     client_id=s6BhdRkqt3&device_posture=%7B%22screen_lock%22%3Atrue%2C
+     %22device_os%22%3A%22iOS%22%2C%22device_os_version%22%3A%2211.1%22
+     %7D
 
 2.1.2.  From Off Device
 
@@ -265,15 +274,6 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
    the following parameters are also defined:
 
    user_agent_posture  OPTIONAL.  URL-encoded JSON dictionary,
-      containing user-agent posture signals, as defined by User Agent
-      Posture Signals.
-
-   For example, the client makes the following HTTP request using
-   transport-layer security (with extra line breaks for display purposes
-   only):
-
-
-
 
 
 
@@ -281,6 +281,13 @@ Hanson & McGuinness     Expires 16 September 2022               [Page 5]
 
 Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
+
+      containing user-agent posture signals, as defined by User Agent
+      Posture Signals.
+
+   For example, the client makes the following HTTP request using
+   transport-layer security (with extra line breaks for display purposes
+   only):
 
   POST /introspect HTTP/1.1
   Host: server.example.com
@@ -297,7 +304,14 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
    Note that the locality of an access token is always off device when
    presented to a resource server.
 
-3.  Normative References
+3.  Comparison to CAEP
+
+   Use of existing endpoints is intended to provide a lightweight
+   approach to continuous authorization, while complimenting future
+   protocols that provide real-time access evaluation using a publish-
+   subscribe approach.
+
+4.  Normative References
 
    [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
@@ -311,6 +325,18 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+
+
+
+
+
+
+
+Hanson & McGuinness     Expires 16 September 2022               [Page 6]
+
+Internet-Draft        OAuth 2.0 Session Continuity            March 2022
+
 
    [I-D.wdenniss-oauth-device-posture]
               Denniss, W., McGuinness, K., and J. Bradley, "OAuth 2.0
@@ -330,35 +356,9 @@ Authors' Addresses
    Email: jared.hanson@okta.com
 
 
-
-
-
-Hanson & McGuinness     Expires 16 September 2022               [Page 6]
-
-Internet-Draft        OAuth 2.0 Session Continuity            March 2022
-
-
    Karl McGuinness
    Okta
    Email: kmcguinness@okta.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

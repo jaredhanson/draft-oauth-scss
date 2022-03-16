@@ -35,25 +35,31 @@ a lightweight approach to continuous authorization.
 
 # Introduction
 
-In OAuth, an authorization server issues access tokens to clients, which are
-used to access protected resources hosted by a resource server.  Prior to
-issuing tokens, the authorization server authenticates the end-user and obtains
-consent.  This interaction establishes a session in which the end-user accesses
-both the authorization server and one or more applications.
+In OAuth 2.0 {{!RFC6749}}, an authorization server issues an access token and
+refresh token to a client.  The client uses the access token to access protected
+resources hosted by a resource server, and uses the refresh token to obtain
+access tokens from the authorization server.  While the authorization server,
+client, and resource server are separate entities, the usage of the access token
+and refresh token forms a logical authorization session shared between each
+entity.
 
-These sessions can be long-lived, lasting for days or months.  During this time,
-the status of the end-user and her device, such as location, network address, or
-security posture, may change - requring a change in access privileges.
-Unfortunately, typical OAuth deployments determine access only at the time of
-authentication and lack awareness of dynamically changing information about
-ongoing sessions.
+The access token and refresh token are issued by the authorization server after
+authenticating the resource owner and obtaining authorization.  Authorization is
+typically obtained by interacting with the resource owner via the authorization
+endpoint.  Once authorization has been obtained, issuance of the tokens
+initiates an ongoing session in which protected resources may be accessed over
+a period of hours or even days.
 
-This specification defines a mechanism in which clients and resource servers can
-share session signals with an authorization server.  These signals are
-transported using existing OAuth 2.0 endpoints.  Use of existing endpoints is
-intended to provide a lightweight approach to continuous authorization, while
-complimenting future protocols that provide real-time access evaluation using a
-publish-subscribe approach.
+During this time, the status of the resource owner and her device, such as role,
+location, or security posture, may change.  Increasingly, access to protected
+resources needs to be based on this dynamically changing context.  However,
+typical OAuth deployments evaluate this context infrequently - often only at
+session initiation.
+
+This specification provides mechanisms by which an OAuth deployment can both
+increase the frequency of access policy evaluation during a session, as well as
+increase awareness of dynamically changing context about the session used to
+inform policy decisions.
 
 ## Client Profiles
 
@@ -195,3 +201,11 @@ security (with extra line breaks for display purposes only):
 
 Note that the locality of an access token is always off device when presented to
 a resource server.
+
+
+# Comparison to CAEP
+
+Use of existing endpoints is
+intended to provide a lightweight approach to continuous authorization, while
+complimenting future protocols that provide real-time access evaluation using a
+publish-subscribe approach.
