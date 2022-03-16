@@ -118,6 +118,29 @@ application is executing either on the device or within the user-agent itself.
 
 {::boilerplate bcp14}
 
+# JSON Web Token Claims
+
+Access tokens and refresh tokens are opaque, and can have different formats,
+structures, and methods of utilization based on resource server and
+authorization server security requirements.  Although the mechanisms described
+herein can be used with any type of token, this section defines claims to
+express such semantics specifically for JSON Web Token (JWT) {{!RFC7519}}.
+Similar definitions for other types of tokens are possible but beyond the scope
+of this specification.
+
+## Access Tokens
+
+JSON Web Token Profile for OAuth 2.0 Access Tokens {{!RFC9068}} defines a
+profile for issuing OAuth 2.0 access tokens in JSON Web Token (JWT) format.
+OAuth 2.0 deployments implementing this specification SHOULD issue access
+tokens in conformance that profile.
+
+The following additional claims MAY be included to facilitate session
+continuity.
+
+sid  OPTIONAL - As defined in Section 3 of OpenID.FrontChannel.
+
+
 # Signal Sharing
 
 ## Refreshing an Access Token
