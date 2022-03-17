@@ -198,8 +198,92 @@ endpoint (with extra line breaks for display purposes only):
   &redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb
 ~~~
 
+A successful response results in an access token and refresh token.
+
+For example, an access token in JWT format would be structured as follows:
+
+~~~
+  { "typ": "at+JWT", "alg": "RS256", "kid": "RjEwOwOA" }
+  .
+  {
+    "iss": "https://server.example.com/",
+    "aud": "https://rs.example.com/",
+    "sub": "248289761001",
+    "client_id": "s6BhdRkqt3",
+    "scope": "read write dolphin",
+    "sid": "08a5019c-17e1-4977-8f42-65a12843ea02",
+    "jti": "dbe39bf3a3ba4238a513f51d6e1691c4",
+    "exp": 1419357438,
+    "iat": 1419350238,
+  }
+~~~
+
+And, for example, a refresh token in JWT format would be structured as follows:
+
+~~~
+  { "typ": "rt+JWT", "alg": "HS256" }
+  .
+  {
+    "iss": "https://server.example.com/",
+    "aud": "https://server.example.com/token",
+    "sub": "248289761001",
+    "client_id": "s6BhdRkqt3",
+    "sid": "08a5019c-17e1-4977-8f42-65a12843ea02",
+    "jti": "ae7eacde7d3a495aad2dc1196a9b659f",
+    "exp": 1421942238,
+    "iat": 1419350238,
+  }
+~~~
+
+The access token and refresh token belong to the same authorization session, as
+indicated by the correlated "sid" claim values.
+
 ## Refreshing an Access Token
 
+If the authorization server issued a refresh token to the client, the client
+makes a refresh request to the token endpoint to obtain a new access token.  If
+valid and authorized, the authorization server issues a new access token and MAY
+issue a new refresh token.  The new access token and refresh token belong to the
+same authorization session as the initial access token and refresh token
+obtained in exchange for the original authorization grant.  To maintain session
+continuity, an authorization server SHOULD include the "sid" claim in the new
+access token and refresh token, if any.  The value of the "sid" claim MUST be
+correlated to the initial access token and refresh token.
+
+For example, a new access token in JWT format would be structured as follows:
+
+~~~
+  { "typ": "at+JWT", "alg": "RS256", "kid": "RjEwOwOA" }
+  .
+  {
+    "iss": "https://server.example.com/",
+    "aud": "https://rs.example.com/",
+    "sub": "248289761001",
+    "client_id": "s6BhdRkqt3",
+    "scope": "read write dolphin",
+    "sid": "08a5019c-17e1-4977-8f42-65a12843ea02",
+    "jti": "dbe39bf3a3ba4238a513f51d6e1691c4",
+    "exp": 1421949318,
+    "iat": 1421942118,
+  }
+~~~
+
+And, for example, a new refresh token in JWT format would be structured as follows:
+
+~~~
+  { "typ": "rt+JWT", "alg": "HS256" }
+  .
+  {
+    "iss": "https://server.example.com/",
+    "aud": "https://server.example.com/token",
+    "sub": "248289761001",
+    "client_id": "s6BhdRkqt3",
+    "sid": "08a5019c-17e1-4977-8f42-65a12843ea02",
+    "jti": "ae7eacde7d3a495aad2dc1196a9b659f",
+    "exp": 1424534118,
+    "iat": 1421942118,
+  }
+~~~
 
 # Signal Sharing
 
