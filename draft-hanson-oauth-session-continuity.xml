@@ -14,6 +14,7 @@
 <!ENTITY RFC8174 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY RFC7519 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7519.xml">
 <!ENTITY RFC9068 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.9068.xml">
+<!ENTITY RFC8693 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8693.xml">
 <!ENTITY I-D.wdenniss-oauth-device-posture SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.wdenniss-oauth-device-posture.xml">
 <!ENTITY RFC7662 SYSTEM "https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7662.xml">
 ]>
@@ -36,7 +37,7 @@
       </address>
     </author>
 
-    <date year="2022" month="March" day="16"/>
+    <date year="2022" month="March" day="17"/>
 
     <area>Security</area>
     <workgroup>Web Authorization Protocol</workgroup>
@@ -180,19 +181,82 @@ of this specification.</t>
 
 <t>JSON Web Token Profile for OAuth 2.0 Access Tokens <xref target="RFC9068"/> defines a
 profile for issuing OAuth 2.0 access tokens in JSON Web Token (JWT) format.
-OAuth 2.0 deployments implementing this specification SHOULD issue access
-tokens in conformance that profile.</t>
+OAuth 2.0 deployments implementing this specification MAY issue access tokens
+in conformance that profile.  Deployments that do not issue access tokens in
+conformance with that profile SHOULD include semantically equivalent claims in
+a deployment-specific token format.</t>
 
-<t>The following additional claims MAY be included to facilitate session
+<t>The following additional claims SHOULD be included to facilitate session
 continuity.</t>
 
-<t>sid  OPTIONAL - As defined in Section 3 of OpenID.FrontChannel.</t>
+<t>sid - as defined in Section 3 of OpenID.FrontChannel.</t>
+
+</section>
+<section anchor="refresh-tokens"><name>Refresh Tokens</name>
+
+<t>Unlike access tokens, refresh tokens are intended only for use with
+authorization servers.  Thus, their format is an internal implementation detail
+of an authorization server and there is little need for a profile to establish
+interoperability between implementations.</t>
+
+<t>OAuth 2.0 deployments implementing this specification MAY issue refresh tokens
+in JWT format.  Implementations that issue refresh tokens in JWT format SHOULD
+include the following claims.</t>
+
+<t>iss - as defined in Section 4.1.1 of <xref target="RFC7519"/>.</t>
+
+<t>exp - as defined in Section 4.1.4 of <xref target="RFC7519"/>.</t>
+
+<t>aud - as defined in Section 4.1.3 of <xref target="RFC7519"/>.</t>
+
+<t>sub - as defined in Section 4.1.2 of <xref target="RFC7519"/>.</t>
+
+<t>client_id - as defined in Section 4.3 of <xref target="RFC8693"/>.</t>
+
+<t>iat - as defined in Section 4.1.6 of <xref target="RFC7519"/>.  This claim identifies the
+time at which the JWT refresh token was issued.</t>
+
+<t>jti - as defined in Section 4.1.7 of <xref target="RFC7519"/>.</t>
+
+<t>sid - as defined in Section 3 of OpenID.FrontChannel.</t>
+
+<t>This specification registers the "application/rt+jwt" media type, which can be
+used to indicate that the content is a JWT refresh token.  JWT refresh tokens
+MUST include this media type in the "typ" header parameter to explicitly declare
+that the JWT represents a refresh token.</t>
+
+<t>Deployments that do not issue refresh tokens in JWT format SHOULD include
+semantically equivalent claims in a deployment-specific token format.</t>
+
+</section>
+</section>
+<section anchor="session-continuity"><name>Session Continuity</name>
+
+<t>An authorization server can issue an access token and, optionally, a refresh
+token in response to any authorization grant defined by <xref target="RFC7519"/> and subsequent
+extensions.  To facilitate session continuity, an authorization server SHOULD
+include the "sid" claim in the access token and refresh token, if any.</t>
+
+<t>For example, the client makes the following HTTP request using TLS to the token
+endpoint (with extra line breaks for display purposes only):</t>
+
+<figure><artwork><![CDATA[
+  POST /token HTTP/1.1
+  Host: server.example.com
+  Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+  Content-Type: application/x-www-form-urlencoded
+
+  grant_type=authorization_code&code=SplxlOBeZQQYbYS6WxSbIA
+  &redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb
+]]></artwork></figure>
+
+<section anchor="refreshing-an-access-token"><name>Refreshing an Access Token</name>
 
 </section>
 </section>
 <section anchor="signal-sharing"><name>Signal Sharing</name>
 
-<section anchor="refreshing-an-access-token"><name>Refreshing an Access Token</name>
+<section anchor="refreshing-an-access-token-1"><name>Refreshing an Access Token</name>
 
 <section anchor="from-on-device"><name>From On Device</name>
 
@@ -306,6 +370,7 @@ publish-subscribe approach.</t>
 &RFC8174;
 &RFC7519;
 &RFC9068;
+&RFC8693;
 &I-D.wdenniss-oauth-device-posture;
 &RFC7662;
 
@@ -318,84 +383,97 @@ publish-subscribe approach.</t>
   </back>
 
 <!-- ##markdown-source:
-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
-By0mAAA=
+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
+hJsNqQTnM49ampH4BzbST+FRLwAA
 
 -->
 

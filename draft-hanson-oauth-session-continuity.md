@@ -178,6 +178,28 @@ that the JWT represents a refresh token.
 Deployments that do not issue refresh tokens in JWT format SHOULD include
 semantically equivalent claims in a deployment-specific token format.
 
+# Session Continuity
+
+An authorization server can issue an access token and, optionally, a refresh
+token in response to any authorization grant defined by {{!RFC7519}} and subsequent
+extensions.  To facilitate session continuity, an authorization server SHOULD
+include the "sid" claim in the access token and refresh token, if any.
+
+For example, the client makes the following HTTP request using TLS to the token
+endpoint (with extra line breaks for display purposes only):
+
+~~~
+  POST /token HTTP/1.1
+  Host: server.example.com
+  Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+  Content-Type: application/x-www-form-urlencoded
+
+  grant_type=authorization_code&code=SplxlOBeZQQYbYS6WxSbIA
+  &redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb
+~~~
+
+## Refreshing an Access Token
+
 
 # Signal Sharing
 

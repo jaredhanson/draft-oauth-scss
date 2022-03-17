@@ -5,7 +5,7 @@
 Web Authorization Protocol                                     J. Hanson
 Internet-Draft                                             K. McGuinness
 Intended status: Standards Track                                    Okta
-Expires: 17 September 2022                                 16 March 2022
+Expires: 18 September 2022                                 17 March 2022
 
 
                       OAuth 2.0 Session Continuity
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 September 2022.
+   This Internet-Draft will expire on 18 September 2022.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Hanson & McGuinness     Expires 17 September 2022               [Page 1]
+Hanson & McGuinness     Expires 18 September 2022               [Page 1]
 
 Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
@@ -75,15 +75,18 @@ Table of Contents
      1.3.  Notational Conventions  . . . . . . . . . . . . . . . . .   4
    2.  JSON Web Token Claims . . . . . . . . . . . . . . . . . . . .   4
      2.1.  Access Tokens . . . . . . . . . . . . . . . . . . . . . .   4
-   3.  Signal Sharing  . . . . . . . . . . . . . . . . . . . . . . .   5
-     3.1.  Refreshing an Access Token  . . . . . . . . . . . . . . .   5
-       3.1.1.  From On Device  . . . . . . . . . . . . . . . . . . .   5
-       3.1.2.  From Off Device . . . . . . . . . . . . . . . . . . .   5
-     3.2.  Token Introspection . . . . . . . . . . . . . . . . . . .   6
-       3.2.1.  Introspection Request . . . . . . . . . . . . . . . .   6
-   4.  Comparison to CAEP  . . . . . . . . . . . . . . . . . . . . .   7
-   5.  Normative References  . . . . . . . . . . . . . . . . . . . .   7
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   7
+     2.2.  Refresh Tokens  . . . . . . . . . . . . . . . . . . . . .   5
+   3.  Session Continuity  . . . . . . . . . . . . . . . . . . . . .   6
+     3.1.  Refreshing an Access Token  . . . . . . . . . . . . . . .   6
+   4.  Signal Sharing  . . . . . . . . . . . . . . . . . . . . . . .   6
+     4.1.  Refreshing an Access Token  . . . . . . . . . . . . . . .   6
+       4.1.1.  From On Device  . . . . . . . . . . . . . . . . . . .   6
+       4.1.2.  From Off Device . . . . . . . . . . . . . . . . . . .   7
+     4.2.  Token Introspection . . . . . . . . . . . . . . . . . . .   7
+       4.2.1.  Introspection Request . . . . . . . . . . . . . . . .   7
+   5.  Comparison to CAEP  . . . . . . . . . . . . . . . . . . . . .   8
+   6.  Normative References  . . . . . . . . . . . . . . . . . . . .   8
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  Introduction
 
@@ -106,10 +109,7 @@ Table of Contents
 
 
 
-
-
-
-Hanson & McGuinness     Expires 17 September 2022               [Page 2]
+Hanson & McGuinness     Expires 18 September 2022               [Page 2]
 
 Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
@@ -165,7 +165,7 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
 
 
-Hanson & McGuinness     Expires 17 September 2022               [Page 3]
+Hanson & McGuinness     Expires 18 September 2022               [Page 3]
 
 Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
@@ -214,28 +214,101 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
    JSON Web Token Profile for OAuth 2.0 Access Tokens [RFC9068] defines
    a profile for issuing OAuth 2.0 access tokens in JSON Web Token (JWT)
-   format.  OAuth 2.0 deployments implementing this specification SHOULD
-   issue access tokens in conformance that profile.
+   format.  OAuth 2.0 deployments implementing this specification MAY
+   issue access tokens in conformance that profile.  Deployments that do
+   not issue access tokens in conformance with that profile SHOULD
+   include semantically equivalent claims in a deployment-specific token
 
 
 
-
-
-Hanson & McGuinness     Expires 17 September 2022               [Page 4]
+Hanson & McGuinness     Expires 18 September 2022               [Page 4]
 
 Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
 
-   The following additional claims MAY be included to facilitate session
-   continuity.
+   format.
 
-   sid OPTIONAL - As defined in Section 3 of OpenID.FrontChannel.
+   The following additional claims SHOULD be included to facilitate
+   session continuity.
 
-3.  Signal Sharing
+   sid - as defined in Section 3 of OpenID.FrontChannel.
+
+2.2.  Refresh Tokens
+
+   Unlike access tokens, refresh tokens are intended only for use with
+   authorization servers.  Thus, their format is an internal
+   implementation detail of an authorization server and there is little
+   need for a profile to establish interoperability between
+   implementations.
+
+   OAuth 2.0 deployments implementing this specification MAY issue
+   refresh tokens in JWT format.  Implementations that issue refresh
+   tokens in JWT format SHOULD include the following claims.
+
+   iss - as defined in Section 4.1.1 of [RFC7519].
+
+   exp - as defined in Section 4.1.4 of [RFC7519].
+
+   aud - as defined in Section 4.1.3 of [RFC7519].
+
+   sub - as defined in Section 4.1.2 of [RFC7519].
+
+   client_id - as defined in Section 4.3 of [RFC8693].
+
+   iat - as defined in Section 4.1.6 of [RFC7519].  This claim
+   identifies the time at which the JWT refresh token was issued.
+
+   jti - as defined in Section 4.1.7 of [RFC7519].
+
+   sid - as defined in Section 3 of OpenID.FrontChannel.
+
+   This specification registers the "application/rt+jwt" media type,
+   which can be used to indicate that the content is a JWT refresh
+   token.  JWT refresh tokens MUST include this media type in the "typ"
+   header parameter to explicitly declare that the JWT represents a
+   refresh token.
+
+   Deployments that do not issue refresh tokens in JWT format SHOULD
+   include semantically equivalent claims in a deployment-specific token
+   format.
+
+
+
+
+
+
+Hanson & McGuinness     Expires 18 September 2022               [Page 5]
+
+Internet-Draft        OAuth 2.0 Session Continuity            March 2022
+
+
+3.  Session Continuity
+
+   An authorization server can issue an access token and, optionally, a
+   refresh token in response to any authorization grant defined by
+   [RFC7519] and subsequent extensions.  To facilitate session
+   continuity, an authorization server SHOULD include the "sid" claim in
+   the access token and refresh token, if any.
+
+   For example, the client makes the following HTTP request using TLS to
+   the token endpoint (with extra line breaks for display purposes
+   only):
+
+     POST /token HTTP/1.1
+     Host: server.example.com
+     Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+     Content-Type: application/x-www-form-urlencoded
+
+     grant_type=authorization_code&code=SplxlOBeZQQYbYS6WxSbIA
+     &redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb
 
 3.1.  Refreshing an Access Token
 
-3.1.1.  From On Device
+4.  Signal Sharing
+
+4.1.  Refreshing an Access Token
+
+4.1.1.  From On Device
 
    A native application possessing a refresh token that is on device
    shares signals by making a refresh request that includes device
@@ -255,7 +328,17 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
      %22device_os%22%3A%22iOS%22%2C%22device_os_version%22%3A%2211.1%22
      %7D
 
-3.1.2.  From Off Device
+
+
+
+
+
+Hanson & McGuinness     Expires 18 September 2022               [Page 6]
+
+Internet-Draft        OAuth 2.0 Session Continuity            March 2022
+
+
+4.1.2.  From Off Device
 
    A web application posessing a refresh token that is off device shares
    signals by making a refresh request that includes user-agent posture,
@@ -264,23 +347,6 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
    For example, the client makes the following HTTP request using
    transport-layer security (with extra line breaks for display purposes
    only):
-
-
-
-
-
-
-
-
-
-
-
-
-
-Hanson & McGuinness     Expires 17 September 2022               [Page 5]
-
-Internet-Draft        OAuth 2.0 Session Continuity            March 2022
-
 
   POST /token HTTP/1.1
   Host: server.example.com
@@ -298,9 +364,9 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
    user is not present, are decoupled from the session and lack end-user
    user agent context.
 
-3.2.  Token Introspection
+4.2.  Token Introspection
 
-3.2.1.  Introspection Request
+4.2.1.  Introspection Request
 
    A resource server querying for to determine the state of an access
    token shares signals by making an by making an introspection request
@@ -318,6 +384,16 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
    transport-layer security (with extra line breaks for display purposes
    only):
 
+
+
+
+
+
+Hanson & McGuinness     Expires 18 September 2022               [Page 7]
+
+Internet-Draft        OAuth 2.0 Session Continuity            March 2022
+
+
   POST /introspect HTTP/1.1
   Host: server.example.com
   Accept: application/json
@@ -330,25 +406,17 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
   %20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F75.0.3770.142%20Safari%2F537.36%22
   %2C%22ip_address%22%3A%2293.184.216.34%22%7D
 
-
-
-
-Hanson & McGuinness     Expires 17 September 2022               [Page 6]
-
-Internet-Draft        OAuth 2.0 Session Continuity            March 2022
-
-
    Note that the locality of an access token is always off device when
    presented to a resource server.
 
-4.  Comparison to CAEP
+5.  Comparison to CAEP
 
    Use of existing endpoints is intended to provide a lightweight
    approach to continuous authorization, while complimenting future
    protocols that provide real-time access evaluation using a publish-
    subscribe approach.
 
-5.  Normative References
+6.  Normative References
 
    [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
@@ -371,6 +439,22 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
               Access Tokens", RFC 9068, DOI 10.17487/RFC9068, October
               2021, <https://www.rfc-editor.org/info/rfc9068>.
 
+
+
+
+
+
+
+Hanson & McGuinness     Expires 18 September 2022               [Page 8]
+
+Internet-Draft        OAuth 2.0 Session Continuity            March 2022
+
+
+   [RFC8693]  Jones, M., Nadalin, A., Campbell, B., Ed., Bradley, J.,
+              and C. Mortimore, "OAuth 2.0 Token Exchange", RFC 8693,
+              DOI 10.17487/RFC8693, January 2020,
+              <https://www.rfc-editor.org/info/rfc8693>.
+
    [I-D.wdenniss-oauth-device-posture]
               Denniss, W., McGuinness, K., and J. Bradley, "OAuth 2.0
               Device Posture Signals", Work in Progress, Internet-Draft,
@@ -386,14 +470,6 @@ Authors' Addresses
 
    Jared Hanson
    Okta
-
-
-
-Hanson & McGuinness     Expires 17 September 2022               [Page 7]
-
-Internet-Draft        OAuth 2.0 Session Continuity            March 2022
-
-
    Email: jared.hanson@okta.com
 
 
@@ -425,24 +501,4 @@ Internet-Draft        OAuth 2.0 Session Continuity            March 2022
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Hanson & McGuinness     Expires 17 September 2022               [Page 8]
+Hanson & McGuinness     Expires 18 September 2022               [Page 9]
