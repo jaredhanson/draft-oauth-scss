@@ -132,13 +132,51 @@ of this specification.
 
 JSON Web Token Profile for OAuth 2.0 Access Tokens {{!RFC9068}} defines a
 profile for issuing OAuth 2.0 access tokens in JSON Web Token (JWT) format.
-OAuth 2.0 deployments implementing this specification SHOULD issue access
-tokens in conformance that profile.
+OAuth 2.0 deployments implementing this specification MAY issue access tokens
+in conformance that profile.  Deployments that do not issue access tokens in
+conformance with that profile SHOULD include semantically equivalent claims in
+a deployment-specific token format.
 
-The following additional claims MAY be included to facilitate session
+The following additional claims SHOULD be included to facilitate session
 continuity.
 
-sid  OPTIONAL - As defined in Section 3 of OpenID.FrontChannel.
+sid - as defined in Section 3 of OpenID.FrontChannel.
+
+## Refresh Tokens
+
+Unlike access tokens, refresh tokens are intended only for use with
+authorization servers.  Thus, their format is an internal implementation detail
+of an authorization server and there is little need for a profile to establish
+interoperability between implementations.
+
+OAuth 2.0 deployments implementing this specification MAY issue refresh tokens
+in JWT format.  Implementations that issue refresh tokens in JWT format SHOULD
+include the following claims.
+
+iss - as defined in Section 4.1.1 of {{!RFC7519}}.
+
+exp - as defined in Section 4.1.4 of {{!RFC7519}}.
+
+aud - as defined in Section 4.1.3 of {{!RFC7519}}.
+
+sub - as defined in Section 4.1.2 of {{!RFC7519}}.
+
+client_id - as defined in Section 4.3 of {{!RFC8693}}.
+
+iat - as defined in Section 4.1.6 of {{!RFC7519}}.  This claim identifies the
+time at which the JWT refresh token was issued.
+
+jti - as defined in Section 4.1.7 of {{!RFC7519}}.
+
+sid - as defined in Section 3 of OpenID.FrontChannel.
+
+This specification registers the "application/rt+jwt" media type, which can be
+used to indicate that the content is a JWT refresh token.  JWT refresh tokens
+MUST include this media type in the "typ" header parameter to explicitly declare
+that the JWT represents a refresh token.
+
+Deployments that do not issue refresh tokens in JWT format SHOULD include
+semantically equivalent claims in a deployment-specific token format.
 
 
 # Signal Sharing
