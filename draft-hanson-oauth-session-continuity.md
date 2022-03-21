@@ -38,10 +38,10 @@ a lightweight approach to continuous authorization.
 In OAuth 2.0 {{!RFC6749}}, an authorization server issues an access token and
 refresh token to a client.  The client uses the access token to access protected
 resources hosted by a resource server, and uses the refresh token to obtain
-access tokens from the authorization server.  While the authorization server,
-client, and resource server are separate entities, the usage of the access token
-and refresh token forms a logical authorization session shared between each
-entity.
+new access tokens from the authorization server.  While the authorization
+server, client, and resource server are separate entities, the usage of the
+access token and refresh token forms a logical authorization session shared
+between each entity.
 
 The access token and refresh token are issued by the authorization server after
 authenticating the resource owner and obtaining authorization.  Authorization is
@@ -262,7 +262,7 @@ For example, a new access token in JWT format would be structured as follows:
     "client_id": "s6BhdRkqt3",
     "scope": "read write dolphin",
     "sid": "08a5019c-17e1-4977-8f42-65a12843ea02",
-    "jti": "dbe39bf3a3ba4238a513f51d6e1691c4",
+    "jti": "5014d91e3ef149ea94e3865962abb883",
     "exp": 1421949318,
     "iat": 1421942118,
   }
@@ -279,7 +279,7 @@ And, for example, a new refresh token in JWT format would be structured as follo
     "sub": "248289761001",
     "client_id": "s6BhdRkqt3",
     "sid": "08a5019c-17e1-4977-8f42-65a12843ea02",
-    "jti": "ae7eacde7d3a495aad2dc1196a9b659f",
+    "jti": "0d629e3212834e838fb6-cbcdece7cf99",
     "exp": 1424534118,
     "iat": 1421942118,
   }
