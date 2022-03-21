@@ -285,9 +285,58 @@ And, for example, a new refresh token in JWT format would be structured as follo
   }
 ~~~
 
-# Signal Sharing
+# Session Authorization
+
+An authorization session is initiated with the issuance of an initial access
+token and refresh token.  These tokens represent specific scopes and durations
+of access based on the context available to the authorization server at the time
+of making an authorization decision and take into account authorization server
+policy.
+
+The particular moments in which the authorization server is able to make
+authorization decisions are typically limited to those in which the authorization
+server is interacting with the resource owner via the authorization endpoint,
+and how frequently that interaction occurs.  For usability reasons, there is
+a desire to minimize user interaction with the authorization server.  As a
+consequence, authorization sessions are often long-lived.  This results in a
+situation in which access decisions that need to account for dynamically
+changing context, such as location, are operating based on out-of-date
+information.
+
+Within an authorization session, an authorization server can utilize the token
+endpoint
+
+
+
+
+
+
+
+During this time, the status of the resource owner and her device, such as role,
+location, or security posture, may change.  Increasingly, access to protected
+resources needs to be based on this dynamically changing context.  However,
+typical OAuth deployments evaluate this context infrequently - often only at
+session initiation.
+
+
+
+
+Once an authorization session has been initiated, and tokens have been issued,
+the client can access protected resources hosted by
+
+## Authorization Endpoint
+
+## Token Endpoint
+
+## Introspection Endpoint
+
 
 ## Refreshing an Access Token
+
+
+
+
+
 
 ### From On Device
 
@@ -369,6 +418,12 @@ security (with extra line breaks for display purposes only):
 
 Note that the locality of an access token is always off device when presented to
 a resource server.
+
+# Session Authorization
+
+
+
+
 
 
 # Comparison to CAEP
